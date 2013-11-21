@@ -1,8 +1,14 @@
 #!/usr/bin/env node
 
 // https://github.com/metaskills/mocha-phantomjs/issues/10
-var jade = require('jade');
-var fs = require('fs');
+var jade    = require('jade');
+var fs      = require('fs');
+var program = require('commander');
+
+program
+  .version('0.2.0')
+  .usage('[options] <file ...>')
+  .parse(process.argv);
 
 // Strings for code coverage classes
 function coverageClass(n) {
@@ -14,14 +20,15 @@ function coverageClass(n) {
 
 // Read in templates
 var file = __dirname + '/templates/coverage.jade';
-var str = fs.readFileSync(file, 'utf8');
-var fn = jade.compile(str, { filename: file });
+var str  = fs.readFileSync(file, 'utf8');
+var fn   = jade.compile(str, { filename: file });
 
-// Read JSON from stdin
-var cov = JSON.parse(fs.readFileSync('/dev/stdin').toString());
+// // Read JSON from stdin
+var jsonString = fs.readFileSync(program.args[0]).toString();
+var coverage = JSON.parse(jsonString);
 
 // Dump HTML
 process.stdout.write(fn({
-    cov: cov,
-    coverageClass: coverageClass
+  cov: coverage,
+  coverageClass: coverageClass
 }));

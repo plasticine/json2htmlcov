@@ -1,12 +1,12 @@
 {
   "name": "json2htmlcov",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": "Yi Wang <e@yi-wang.me>",
-  "contributors": [ 
+  "contributors": [
     {
       "name": "Larry Davis",
       "email": "lazdnet@gmail.com"
-    } 
+    }
   ],
   "description": "convert json-cov to html-cov for mocha",
   "main": "index.js",
@@ -14,7 +14,8 @@
     "json2htmlcov": "./bin/json2htmlcov"
   },
   "dependencies": {
-    "jade": "0.29.0"
+    "jade": "0.29.0",
+    "commander": "~2.1.0"
   },
   "devDependencies": {},
   "scripts": {
